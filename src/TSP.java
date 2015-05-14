@@ -5,11 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
-import java.util.Arrays;
-import java.awt.*; 
+import java.util.*;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -104,7 +101,20 @@ public class TSP {
 
     public static void evolve() {
         //Write evolution code here.
+        sortChromosomes();
+
+        for (int i = 2; i < chromosomes.length; i++){
+            chromosomes[i].randomMutate();
+        }
     }
+
+    public static void sortChromosomes(){
+        Arrays.sort(chromosomes);
+
+    }
+
+
+
 
     /**
      * Update the display
@@ -201,6 +211,7 @@ public class TSP {
                         (int) (Math.random() * (height - 50) + 30));
                 }
 
+
                 writeLog("Run Stats for experiment at: " + currentTime);
                 for (int y = 1; y <= runs; y++) {
                     print(display,  "Run " + y + "\n");
@@ -218,7 +229,8 @@ public class TSP {
                         evolve();
                         generation++;
 
-                        Chromosome.sortChromosomes(chromosomes, populationSize);
+                        sortChromosomes();
+
                         double cost = chromosomes[0].getCost();
                         thisCost = cost;
 

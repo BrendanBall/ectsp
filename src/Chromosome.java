@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-class Chromosome {
+class Chromosome implements Comparable<Chromosome> {
 
     /**
      * The list of cities, which are the genes of this chromosome.
      */
     protected int[] cityList;
-
+    protected City[] cities;
     /**
      * The cost of following the cityList order of this chromosome.
      */
@@ -17,6 +17,7 @@ class Chromosome {
      * @param cities The order that this chromosome would visit the cities.
      */
     Chromosome(City[] cities) {
+        this.cities = cities;
         Random generator = new Random();
         cityList = new int[cities.length];
         //cities are visited based on the order of an integer representation [o,n] of each of the n cities.
@@ -33,15 +34,34 @@ class Chromosome {
             cityList[randomNum] = temp;
         }
 
-        calculateCost(cities);
+        calculateCost();
+    }
+
+    public void randomMutate(){
+        Random generator = new Random();
+        int rand1;
+        int rand2;
+        int temp;
+        int numMutations = cityList.length / 15;
+
+        for (int i = 0; i <  numMutations; i++){
+            rand1 = generator.nextInt(cityList.length);
+            rand2 = generator.nextInt(cityList.length);
+            temp = cityList[rand1];
+            cityList[rand1] = cityList[rand2];
+            cityList[rand2] = temp;
+
+        }
+        calculateCost();
+
     }
 
     /**
      * Calculate the cost of the specified list of cities.
      *
-     * @param cities A list of cities.
+     *
      */
-    void calculateCost(City[] cities) {
+    void calculateCost() {
         cost = 0;
         for (int i = 0; i < cityList.length - 1; i++) {
             double dist = cities[cityList[i]].proximity(cities[cityList[i + 1]]);
@@ -106,5 +126,11 @@ class Chromosome {
                 }
             }
         }
+    }
+
+    @Override
+    public int compareTo(Chromosome c) {
+        return ((Double)this.getCost()).compareTo(c.getCost());
+
     }
 }
