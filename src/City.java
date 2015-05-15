@@ -21,6 +21,8 @@ public class City {
         ypos = y;
     }
 
+
+
     /**
      * Return's the city's x position.
      *

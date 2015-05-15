@@ -37,6 +37,11 @@ class Chromosome implements Comparable<Chromosome> {
         calculateCost();
     }
 
+    Chromosome(Chromosome s){
+        this.cities = s.cities;
+        this.cityList = s.cityList.clone();
+    }
+
     public void randomMutate(){
         Random generator = new Random();
         int rand1;
