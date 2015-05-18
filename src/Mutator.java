@@ -4,6 +4,7 @@ public class Mutator {
 
     protected City[] cities;
     protected int cityCount;
+    protected int mutateProbability = 80;
 
     public Mutator(City[] cities) {
         this.cities = cities;
@@ -12,7 +13,10 @@ public class Mutator {
 
     public Chromosome[] process(Chromosome[] chromosomes){
         for (int i = 10; i < chromosomes.length; i++){
-            chromosomes[i].randomMutate();
+            if (TSP.selectWithProb(mutateProbability)){
+                chromosomes[i].randomMutate();
+
+            }
         }
         return chromosomes;
     }

@@ -50,6 +50,7 @@ public class TSP {
     protected static Mutator mutator;
     protected static Recombinator recombinator;
     protected static Selector selector;
+    protected static Random generator;
 
     /**
     * Frame to display cities and paths
@@ -125,6 +126,15 @@ public class TSP {
 
     }
 
+    public static boolean selectWithProb(int P){
+        int random = generator.nextInt(100);
+        return random <= P;
+    }
+
+    public static int randomInRange(int min, int max){
+        return generator.nextInt((max - min) + 1) + min;
+    }
+
 
 
 
@@ -168,6 +178,8 @@ public class TSP {
         DateFormat df = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
         String currentTime  = df.format(today);
+        generator = new Random();
+
 
         int runs;
         boolean display = false;

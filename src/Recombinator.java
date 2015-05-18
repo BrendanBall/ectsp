@@ -11,6 +11,11 @@ public class Recombinator {
     }
 
     public Chromosome[] process(Chromosome[] chromosomes){
+        return recombineHelper(chromosomes);
+    }
+
+
+    private Chromosome[] recombineHelper(Chromosome[] chromosomes){
         TSP.sortChromosomes(chromosomes);
         for (int i = 1; i < 11; i+=2){
             recombine(chromosomes[i], chromosomes[i+1]);
@@ -28,7 +33,7 @@ public class Recombinator {
         HashSet<Integer> hashSet1 = new HashSet<Integer>(cityCount);
         HashSet<Integer> hashSet2 = new HashSet<Integer>(cityCount);
 
-        int randomsplit = cityCount / 2;
+        int randomsplit = TSP.randomInRange(1, cityCount - 1);
         for (int i = 0; i < randomsplit; i++){
             hashSet1.add(city1[i]);
             hashSet2.add(city2[i]);
