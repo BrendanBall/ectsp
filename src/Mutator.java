@@ -4,8 +4,8 @@ public class Mutator {
 
     protected City[] cities;
     protected int cityCount;
-    protected int mutateProbability = 50;
-    protected int invertProbability = 50;
+    protected int mutateProbability = 40;
+    protected int invertProbability = 60;
 
 
     public Mutator(City[] cities) {

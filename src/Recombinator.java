@@ -17,7 +17,7 @@ public class Recombinator {
 
 
     private Chromosome[] recombine(Chromosome[] chromosomes){
-        TSP.sortChromosomes(chromosomes);
+        TSP.shuffleChromosomes(chromosomes);
         for (int i = 0; i < chromosomes.length-1; i+=2){
             if (TSP.selectWithProb(recombineProbability)) {
                 crossover(chromosomes[i], chromosomes[i + 1]);

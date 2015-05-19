@@ -108,7 +108,8 @@ public class TSP {
 
     public static void evolve() {
         //Write evolution code here.
-        Chromosome[] children = recombinator.process(deepCopy(chromosomes));
+        Chromosome[] children = selector.duplicate(chromosomes);
+        children = recombinator.process(children);
         children = mutator.process(children);
         chromosomes = selector.select(chromosomes, children);
     }
@@ -132,6 +133,17 @@ public class TSP {
 
     public static void sortChromosomes(Chromosome[] chromosomes){
         Arrays.sort(chromosomes);
+
+    }
+
+    public static void shuffleChromosomes(Chromosome[] chromosomes){
+        for (int i = 0; i < chromosomes.length; i++)
+        {
+            int index = generator.nextInt(i + 1);
+            Chromosome c = chromosomes[index];
+            chromosomes[index] = chromosomes[i];
+            chromosomes[i] = c;
+        }
 
     }
 
