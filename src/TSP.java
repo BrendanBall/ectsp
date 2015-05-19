@@ -140,6 +140,7 @@ public class TSP {
         return random <= P;
     }
 
+
     public static int randomInRange(int min, int max){
         return generator.nextInt((max - min) + 1) + min;
     }

@@ -48,7 +48,7 @@ class Chromosome implements Comparable<Chromosome> {
         int rand1;
         int rand2;
         int temp;
-        int numMutations = cityList.length / 15;
+        int numMutations = 2;
 
         for (int i = 0; i <  numMutations; i++){
             rand1 = generator.nextInt(cityList.length);

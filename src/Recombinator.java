@@ -12,15 +12,15 @@ public class Recombinator {
     }
 
     public Chromosome[] process(Chromosome[] chromosomes){
-        return recombineHelper(chromosomes);
+        return recombine(chromosomes);
     }
 
 
-    private Chromosome[] recombineHelper(Chromosome[] chromosomes){
+    private Chromosome[] recombine(Chromosome[] chromosomes){
         TSP.sortChromosomes(chromosomes);
         for (int i = 0; i < chromosomes.length-1; i+=2){
             if (TSP.selectWithProb(recombineProbability)) {
-                recombine(chromosomes[i], chromosomes[i + 1]);
+                crossover(chromosomes[i], chromosomes[i + 1]);
                 chromosomes[i].calculateCost();
                 chromosomes[i + 1].calculateCost();
             }
@@ -29,7 +29,7 @@ public class Recombinator {
         return chromosomes;
     }
 
-    private void recombine(Chromosome c1, Chromosome c2){
+    private void crossover(Chromosome c1, Chromosome c2){
         int[] city1 = c1.cityList.clone();
         int[] city2 = c2.cityList.clone();
 
