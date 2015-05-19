@@ -12,7 +12,7 @@ public class Mutator {
     }
 
     public Chromosome[] process(Chromosome[] chromosomes){
-        for (int i = 10; i < chromosomes.length; i++){
+        for (int i = 0; i < chromosomes.length; i++){
             if (TSP.selectWithProb(mutateProbability)){
                 chromosomes[i].randomMutate();
 

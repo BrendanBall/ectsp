@@ -3,6 +3,7 @@ import java.util.HashSet;
 public class Recombinator {
     protected City[] cities;
     protected int cityCount;
+    protected int recombineProbability = 60;
 
     public Recombinator(City[] cities) {
         this.cities = cities;
@@ -17,10 +18,12 @@ public class Recombinator {
 
     private Chromosome[] recombineHelper(Chromosome[] chromosomes){
         TSP.sortChromosomes(chromosomes);
-        for (int i = 1; i < 11; i+=2){
-            recombine(chromosomes[i], chromosomes[i+1]);
-            chromosomes[i].calculateCost();
-            chromosomes[i+1].calculateCost();
+        for (int i = 0; i < chromosomes.length-1; i+=2){
+            if (TSP.selectWithProb(recombineProbability)) {
+                recombine(chromosomes[i], chromosomes[i + 1]);
+                chromosomes[i].calculateCost();
+                chromosomes[i + 1].calculateCost();
+            }
 
         }
         return chromosomes;
