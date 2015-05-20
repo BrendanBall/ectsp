@@ -33,12 +33,14 @@ public class Selector {
     }
 
     public Chromosome[] duplicate(Chromosome[] parents){
-        Chromosome[] children = new Chromosome[parents.length * 2];
+        int duplicates = 4;
+        Chromosome[] children = new Chromosome[parents.length * duplicates];
         for (int i = 0; i < parents.length; i++){
-            children[i*2] = new Chromosome(parents[i]);
-            children[i*2+1] = new Chromosome(parents[i]);
+            for (int j=0; j < duplicates; j++){
 
+            children[i*duplicates + j] = new Chromosome(parents[i]);
 
+            }
         }
         TSP.shuffleChromosomes(children);
         return children;
