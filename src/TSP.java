@@ -108,7 +108,7 @@ public class TSP {
 
     public static void evolve() {
         //Write evolution code here.
-        Chromosome[] children = selector.duplicate(chromosomes);
+        Chromosome[] children = selector.tournament(chromosomes);
         children = recombinator.process(children);
         children = mutator.process(children);
         chromosomes = selector.select(chromosomes, children);
@@ -156,6 +156,11 @@ public class TSP {
     public static int randomInRange(int min, int max){
         return generator.nextInt((max - min) + 1) + min;
     }
+
+    public static int randomInRange(int max){
+        return generator.nextInt(max);
+    }
+
 
 
 
@@ -258,8 +263,8 @@ public class TSP {
                 }
 
                 mutator = new Mutator(cities);
-                recombinator = new Recombinator(cities);
-                selector = new Selector(cities);
+                recombinator = new Recombinator(cities, populationSize);
+                selector = new Selector(cities, populationSize);
 
                 writeLog("Run Stats for experiment at: " + currentTime);
                 for (int y = 1; y <= runs; y++) {

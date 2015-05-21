@@ -4,15 +4,34 @@ public class Recombinator {
     protected City[] cities;
     protected int cityCount;
     protected int recombineProbability = 60;
+    protected int popSize;
 
-    public Recombinator(City[] cities) {
+    public Recombinator(City[] cities, int popSize) {
         this.cities = cities;
         this.cityCount = cities.length;
+        this.popSize = popSize;
 
     }
 
     public Chromosome[] process(Chromosome[] chromosomes){
-        return recombine(chromosomes);
+        Chromosome[] children = new Chromosome[popSize * 4];
+        int a;
+        int b;
+        for (int i = 0; i < children.length; i+=2){
+            a = TSP.randomInRange(chromosomes.length);
+            b = TSP.randomInRange(chromosomes.length);
+            while (b != a){b = TSP.randomInRange(chromosomes.length);}
+
+            Chromosome c1 = new Chromosome(chromosomes[a]);
+            Chromosome c2 = new Chromosome(chromosomes[b]);
+
+            crossover(c1, c2);
+            children[i] = c1;
+            children[i+1] = c2;
+
+        }
+        return children;
+
     }
 
 

@@ -4,17 +4,21 @@ public class Selector {
 
     protected City[] cities;
     protected int cityCount;
+    protected int popSize;
 
-    public Selector(City[] cities) {
+
+    public Selector(City[] cities, int popSize) {
         this.cities = cities;
         this.cityCount = cities.length;
+        this.popSize = popSize;
+
 
     }
 
     public Chromosome[] select(Chromosome[] parents, Chromosome[] children){
         TSP.sortChromosomes(parents);
         TSP.sortChromosomes(children);
-        Chromosome[] survivors = new Chromosome[parents.length];
+        Chromosome[] survivors = new Chromosome[popSize];
         int p = 0;
         int c = 0;
         for (int i = 0; i < survivors.length; i++){
@@ -47,5 +51,28 @@ public class Selector {
     }
 
 
+    public Chromosome[] tournament(Chromosome[] parents){
+        TSP.shuffleChromosomes(parents);
+        int groupsize = 70;
+        int numWinners = parents.length / groupsize;
+        Chromosome[] winners = new Chromosome[numWinners];
+
+        for (int i = 0; i < winners.length; i++){
+            winners[i] = new Chromosome(groupMin(parents, i * groupsize, i * groupsize + groupsize));
+        }
+        TSP.shuffleChromosomes(winners);
+
+        return winners;
+    }
+
+    public Chromosome groupMin(Chromosome[] chromosomes, int start, int end){
+        Chromosome minChromosome = chromosomes[0];
+        for (int i = start + 1; i < end; i++ ){
+            if (chromosomes[i].getCost() < minChromosome.getCost() ){
+                minChromosome = chromosomes[i];
+            }
+        }
+        return minChromosome;
+    }
 
 }
