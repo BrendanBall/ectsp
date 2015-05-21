@@ -36,6 +36,8 @@ public class TSP {
      * The current generation
      */
     protected static int generation;
+    protected static int maxGeneration = 100;
+
 
     /**
      * The list of cities.
@@ -279,7 +281,7 @@ public class TSP {
                     generation = 0;
                     double thisCost = 0.0;
 
-                    while (generation < 100) {
+                    while (generation < maxGeneration) {
                         evolve();
                         generation++;
 
