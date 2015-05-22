@@ -53,8 +53,8 @@ public class Selector {
 
     public Chromosome[] tournament(Chromosome[] parents){
         TSP.shuffleChromosomes(parents);
-        int groupsize = 70;
-        int numWinners = parents.length / groupsize;
+        int numWinners = 4;
+        int groupsize = parents.length / numWinners;
         Chromosome[] winners = new Chromosome[numWinners];
 
         for (int i = 0; i < winners.length; i++){

@@ -4,7 +4,7 @@ public class Mutator {
 
     protected City[] cities;
     protected int cityCount;
-    protected int mutateProbability = 50;
+    protected int mutateProbability = 60;
     protected int invertProbability = 60;
 
 
@@ -30,9 +30,9 @@ public class Mutator {
     }
 
     private void invert(Chromosome c){
-        int invertLength = TSP.randomInRange(3, cityCount/3);
-        int start = TSP.randomInRange(1, cityCount - invertLength - 1);
-        int end = start + invertLength;
+        int invertLength = TSP.randomInRange(2, cityCount - 1);
+        int start = TSP.randomInRange(1, cityCount - invertLength );
+        int end = start + invertLength - 1;
 
         int temp;
         while (start < end){
